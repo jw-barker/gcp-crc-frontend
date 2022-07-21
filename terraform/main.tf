@@ -1,147 +1,77 @@
+###S3 Bucket###
+
 resource "aws_s3_bucket" "jw-barker" {
   bucket = "jw-barker"
 
-  tags = {
-    Name = "my website bucket"
-  }
 }
-
-#resource "aws_s3_bucket_acl" "b_acl" {
-#  bucket = aws_s3_bucket.jw-barker.id
-#  acl    = "private"
-#}
-
+resource "aws_s3_bucket_policy" "bucket_policy" {
+    bucket = aws_s3_bucket.jw-barker.id
+  
+    policy = <<EOF
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PublicReadGetObject",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::jw-barker/*"
+        },
+        {
+            "Sid": "2",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity E5NVW0CDOPFF5"
+            },
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::jw-barker/*"
+        }
+    ]
+}
+  EOF
+  }
+  
+####Cloudfront####
 resource "aws_cloudfront_distribution" "s3_distribution" {
-  enabled             = true
-  price_class = "PriceClass_All"
-  tags = {
-    "Environment" = "production"
-  }
-  tags_all = {
-    "Environment" = "production"
-  }
 
+  depends_on = [
+    aws_s3_bucket.jw-barker
+  ]
+  origin {
+    domain_name         = var.domain_name
+    origin_id           = local.s3_origin_id
+    connection_attempts = 3
+    connection_timeout  = 10
+
+    s3_origin_config {
+      origin_access_identity = "origin-access-identity/cloudfront/E5NVW0CDOPFF5"
+    }
+  }
+  enabled             = true
+  is_ipv6_enabled     = true
+  default_root_object = "index.html"
 
   aliases = ["*.jamesbarker.uk", "jamesbarker.uk"]
-  default_cache_behavior {
-    cached_methods = ["GET", "HEAD"]
-    allowed_methods = ["DELETE","OPTIONS","PATCH","POST","PUT","GET","HEAD"]
 
-    cache_policy_id        = "658327ea-f89d-4fab-a63d-7e88639e58f6"
-    compress               = true
+  default_cache_behavior {
+    allowed_methods  = ["GET", "HEAD"]
+    cached_methods   = ["GET", "HEAD"]
+    target_origin_id = local.s3_origin_id
+    compress         = true
+    cache_policy_id  = var.cache_policy
+
+    viewer_protocol_policy = "redirect-to-https"
+    min_ttl                = 0
     default_ttl            = 0
     max_ttl                = 0
-    target_origin_id       = "organization-formation-515266552493.s3.eu-west-1.amazonaws.com"
-    viewer_protocol_policy = "redirect-to-https"
-
- #   forwarded_values {
-#
- #     query_string = false
-#
-#
- #     cookies {
- #       forward = "none"
-#
- #     }
- #   }
   }
 
-  ordered_cache_behavior {
-    allowed_methods = [
-      "GET",
-      "HEAD",
-      "OPTIONS",
-    ]
-    cached_methods = [
-      "GET",
-      "HEAD",
-      "OPTIONS",
-    ]
-    compress               = true
-    default_ttl            = 86400
-    max_ttl                = 31536000
-    min_ttl                = 0
-    path_pattern           = "/content/immutable/*"
-    target_origin_id       = "jw-barker.s3-website-eu-west-1.amazonaws.com"
-    viewer_protocol_policy = "redirect-to-https"
-
-    forwarded_values {
-      headers = [
-        "Origin",
-      ]
-      query_string = false
-
-
-      cookies {
-        forward = "none"
-      }
-    }
-  }
-  ordered_cache_behavior {
-    allowed_methods = [
-      "GET",
-      "HEAD",
-      "OPTIONS",
-    ]
-    cached_methods = [
-      "GET",
-      "HEAD",
-    ]
-    compress               = true
-    default_ttl            = 3600
-    max_ttl                = 86400
-    min_ttl                = 0
-    path_pattern           = "/content/*"
-    target_origin_id       = "jw-barker.s3-website-eu-west-1.amazonaws.com"
-    viewer_protocol_policy = "redirect-to-https"
-
-    forwarded_values {
-
-      query_string = false
-
-
-      cookies {
-        forward = "none"
-      }
-    }
-  }
-
-  origin {
-    connection_attempts = 3
-    connection_timeout  = 10
-    domain_name         = "jw-barker.s3-website-eu-west-1.amazonaws.com"
-    origin_id           = "organization-formation-515266552493.s3.eu-west-1.amazonaws.com"
-
-    custom_origin_config {
-      http_port                = 80
-      https_port               = 443
-      origin_keepalive_timeout = 5
-      origin_protocol_policy   = "http-only"
-      origin_read_timeout      = 30
-      origin_ssl_protocols = [
-        "TLSv1",
-        "TLSv1.1",
-        "TLSv1.2",
-      ]
-    }
-  }
-  origin {
-    connection_attempts = 3
-    connection_timeout  = 10
-    domain_name         = "jw-barker.s3.eu-west-1.amazonaws.com"
-    origin_id           = "jw-barker.s3-website-eu-west-1.amazonaws.com"
-  }
+  price_class = var.price_class
 
   restrictions {
     geo_restriction {
-      locations = [
-        "CA",
-        "DE",
-        "GB",
-        "IR",
-        "US",
-      ]
-      restriction_type = "whitelist"
+      restriction_type = "none"
     }
   }
 
@@ -152,3 +82,22 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     ssl_support_method             = "sni-only"
   }
 }
+
+locals {
+  s3_origin_id = "jw-barker.s3.eu-west-1.amazonaws.com"
+}
+
+#resource "aws_s3_bucket_acl" "acl" {
+#  bucket = aws_s3_bucket.jw-barker.id
+#  acl    = "public-read"
+#
+#}
+
+#resource "aws_s3_bucket_public_access_block" "website_bucket_public_access_block" {
+#
+#  bucket                  = aws_s3_bucket.jw-barker.id
+#  ignore_public_acls      = false
+#  block_public_acls       = false
+#  restrict_public_buckets = false
+#  block_public_policy     = false
+#}

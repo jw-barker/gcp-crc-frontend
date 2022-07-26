@@ -4,9 +4,9 @@ resource "aws_s3_bucket" "jw-barker" {
 
 }
 resource "aws_s3_bucket_policy" "bucket_policy" {
-    bucket = aws_s3_bucket.jw-barker.id
-  
-    policy = <<EOF
+  bucket = aws_s3_bucket.jw-barker.id
+
+  policy = <<EOF
   {
     "Version": "2012-10-17",
     "Statement": [
@@ -29,7 +29,7 @@ resource "aws_s3_bucket_policy" "bucket_policy" {
     ]
 }
   EOF
-  }
+}
 ###Remote state###
 resource "aws_s3_bucket" "terraform_state" {
   bucket = "terraform-state"
@@ -57,7 +57,7 @@ resource "aws_dynamodb_table" "terraform_locks" {
     type = "S"
   }
 }
- 
+
 ####Cloudfront####
 resource "aws_cloudfront_distribution" "s3_distribution" {
 

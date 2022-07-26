@@ -1,5 +1,4 @@
 ###S3 Bucket###
-
 resource "aws_s3_bucket" "jw-barker" {
   bucket = "jw-barker"
 
@@ -31,7 +30,34 @@ resource "aws_s3_bucket_policy" "bucket_policy" {
 }
   EOF
   }
-  
+###Remote state###
+resource "aws_s3_bucket" "terraform_state" {
+  bucket = "terraform-state"
+
+  # Enable versioning so we can see the full revision history of the state
+  versioning {
+    enabled = true
+  }
+  server_side_encryption_configuration {
+    rule {
+      apply_server_side_encryption_by_default {
+        sse_algorithm = "AES256"
+      }
+    }
+  }
+}
+
+resource "aws_dynamodb_table" "terraform_locks" {
+  name         = "terraform-locks"
+  billing_mode = "PAY_PER_REQUEST"
+  hash_key     = "LockID"
+
+  attribute {
+    name = "LockID"
+    type = "S"
+  }
+}
+ 
 ####Cloudfront####
 resource "aws_cloudfront_distribution" "s3_distribution" {
 

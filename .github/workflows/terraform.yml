@@ -8,21 +8,21 @@ env:
   GITHUB_TOKEN: ${{secrets.BOT_TOKEN_GITHUB}}
   GITHUB_OWNER: "jw-barker"
 jobs:
-  tfsec:
-      name: tfsec
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout
-          uses: actions/checkout@master
-        - name: Terraform security scan
-          uses: aquasecurity/tfsec-pr-commenter-action@v1.2.0
-          with:
-            github_token: ${{ secrets.GITHUB_TOKEN }}
-      #  - name: Save terraform.json
-      #    uses: actions/upload-artifact@v1
-      #    with: 
-      #      name: file
-      #      path: results.json
+#  tfsec:
+#      name: tfsec
+#      runs-on: ubuntu-latest
+#      steps:
+#        - name: Checkout
+#          uses: actions/checkout@master
+#        - name: Terraform security scan
+#          uses: aquasecurity/tfsec-pr-commenter-action@v1.2.0
+#          with:
+#            github_token: ${{ secrets.GITHUB_TOKEN }}
+#      #  - name: Save terraform.json
+#      #    uses: actions/upload-artifact@v1
+#      #    with: 
+#      #      name: file
+#      #      path: results.json
   terraform:
     needs: tfsec
     name: 'Terraform validate'

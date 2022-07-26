@@ -24,7 +24,6 @@ jobs:
 #      #      name: file
 #      #      path: results.json
   terraform:
-    needs: tfsec
     name: 'Terraform validate'
     runs-on: ubuntu-latest
     steps:

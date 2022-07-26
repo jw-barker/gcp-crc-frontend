@@ -18,11 +18,11 @@ jobs:
           uses: aquasecurity/tfsec-pr-commenter-action@v1.2.0
           with:
             github_token: ${{ secrets.GITHUB_TOKEN }}
-        - name: Save terraform.json
-          uses: actions/upload-artifact@v1
-          with: 
-            name: file
-            path: results.json
+      #  - name: Save terraform.json
+      #    uses: actions/upload-artifact@v1
+      #    with: 
+      #      name: file
+      #      path: results.json
   terraform:
     needs: tfsec
     name: 'Terraform validate'

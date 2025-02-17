@@ -310,12 +310,12 @@ a {
   bottom: 0;
 }
 .section-wrapper .skill-percentage:nth-child(1)::before {
-  width: 90%;
+  width: 80%;
   -webkit-animation: skill_1 0.6s ease;
           animation: skill_1 0.6s ease;
 }
 .section-wrapper .skill-percentage:nth-child(2)::before {
-  width: 80%;
+  width: 90%;
   -webkit-animation: skill_2 0.6s ease;
           animation: skill_2 0.6s ease;
 }
@@ -340,7 +340,7 @@ a {
           animation: skill_6 0.6s ease;
 }
 .section-wrapper .skill-percentage:nth-child(7)::before {
-  width: 70%;
+  width: 90%;
   -webkit-animation: skill_6 0.6s ease;
           animation: skill_6 0.6s ease;
 }

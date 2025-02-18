@@ -23,11 +23,14 @@ jobs:
           credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
 
       - name: Initialize Terraform
+        working-directory: terraform
         run: terraform init
 
       - name: Plan Terraform Changes
+        working-directory: terraform
         run: terraform plan
 
       - name: Apply Terraform Changes
         if: github.ref == 'refs/heads/main'
+        working-directory: terraform
         run: terraform apply -auto-approve

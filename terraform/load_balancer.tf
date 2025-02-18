@@ -1,7 +1,7 @@
 resource "google_compute_backend_bucket" "static_backend" {
   name        = "staticsite-backend-bucket"
   bucket_name = google_storage_bucket.static_site.name
-  enable_cdn  = false
+  enable_cdn  = true
 }
 
 resource "google_compute_url_map" "static_site" {

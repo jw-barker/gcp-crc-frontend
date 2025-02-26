@@ -32,3 +32,8 @@ variable "dns_records" {
   description = "Map of DNS records for the domain"
   type        = map(string)
 }
+
+variable "service_account" {
+  description = "Service account email for Cloud Run invoker"
+  type        = string
+}

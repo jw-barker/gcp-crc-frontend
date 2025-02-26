@@ -7,7 +7,7 @@ This repository contains my implementation of the Cloud Resume Challenge, design
 - **Frontend**: HTML, CSS, JavaScript
 - **Cloud Provider**: Google Cloud Platform
 - **Infrastructure as Code (IaC)**: Terraform
-- **Backend**: Cloud Functions, Firestore
+- **Backend**: Cloud Run, Firestore
 - **CI/CD**: GitHub Actions
 - **Monitoring & Logging**: Cloud Logging, Cloud Monitoring
 - **Security**: IAM, Cloud Storage permissions
@@ -37,7 +37,7 @@ This repository contains my implementation of the Cloud Resume Challenge, design
 - [x] Set up repository
 - [x] Deploy static site to Cloud Storage
 - [ ] Implement serverless function for visitor counter
-- [ ] Configure Firestore database
+- [x] Configure Firestore database
 - [x] Automate deployment with CI/CD
 - [ ] Add monitoring and logging
 

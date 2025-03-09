@@ -295,7 +295,7 @@ a {
 }
 .section-wrapper .skill-percentage::after {
   content: "";
-  width: 100%;
+  width: 80%;
   height: 6px;
   background: #4a4e51;
   display: block;

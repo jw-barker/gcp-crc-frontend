@@ -310,37 +310,37 @@ a {
   bottom: 0;
 }
 .section-wrapper .skill-percentage:nth-child(1)::before {
-  width: 90%;
+  width: 50%;
   -webkit-animation: skill_1 0.6s ease;
           animation: skill_1 0.6s ease;
 }
 .section-wrapper .skill-percentage:nth-child(2)::before {
-  width: 90%;
+  width: 50%;
   -webkit-animation: skill_2 0.6s ease;
           animation: skill_2 0.6s ease;
 }
 .section-wrapper .skill-percentage:nth-child(3)::before {
-  width: 90%;
+  width: 50%;
   -webkit-animation: skill_3 0.6s ease;
           animation: skill_3 0.6s ease;
 }
 .section-wrapper .skill-percentage:nth-child(4)::before {
-  width: 90%;
+  width: 50%;
   -webkit-animation: skill_4 0.6s ease;
           animation: skill_4 0.6s ease;
 }
 .section-wrapper .skill-percentage:nth-child(5)::before {
-  width: 90%;
+  width: 50%;
   -webkit-animation: skill_5 0.6s ease;
           animation: skill_5 0.6s ease;
 }
 .section-wrapper .skill-percentage:nth-child(6)::before {
-  width: 90%;
+  width: 50%;
   -webkit-animation: skill_6 0.6s ease;
           animation: skill_6 0.6s ease;
 }
 .section-wrapper .skill-percentage:nth-child(7)::before {
-  width: 90%;
+  width: 50%;
   -webkit-animation: skill_6 0.6s ease;
           animation: skill_6 0.6s ease;
 }
@@ -350,7 +350,7 @@ a {
     width: 0%;
   }
   to {
-    width: 90%;
+    width: 70%;
   }
 }
 
@@ -359,7 +359,7 @@ a {
     width: 0%;
   }
   to {
-    width: 90%;
+    width: 70%;
   }
 }
 @-webkit-keyframes skill_2 {
@@ -383,7 +383,7 @@ a {
     width: 0%;
   }
   to {
-    width: 50%;
+    width: 60%;
   }
 }
 @keyframes skill_3 {
@@ -391,7 +391,7 @@ a {
     width: 0%;
   }
   to {
-    width: 50%;
+    width: 70%;
   }
 }
 @-webkit-keyframes skill_4 {
@@ -431,7 +431,7 @@ a {
     width: 0%;
   }
   to {
-    width: 70%;
+    width: 90%;
   }
 }
 @keyframes skill_6 {
@@ -439,7 +439,7 @@ a {
     width: 0%;
   }
   to {
-    width: 70%;
+    width: 90%;
   }
 }
 @-webkit-keyframes skill_7 {
@@ -447,7 +447,7 @@ a {
     width: 0%;
   }
   to {
-    width: 70%;
+    width: 80%;
   }
 }
 @keyframes skill_7 {
@@ -455,6 +455,6 @@ a {
     width: 0%;
   }
   to {
-    width: 70%;
+    width: 80%;
   }
 }

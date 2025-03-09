@@ -295,7 +295,7 @@ a {
 }
 .section-wrapper .skill-percentage::after {
   content: "";
-  width: 80%;
+  width: 90%;
   height: 6px;
   background: #4a4e51;
   display: block;
@@ -310,37 +310,37 @@ a {
   bottom: 0;
 }
 .section-wrapper .skill-percentage:nth-child(1)::before {
-  width: 100%;
+  width: 90%;
   -webkit-animation: skill_1 0.6s ease;
           animation: skill_1 0.6s ease;
 }
 .section-wrapper .skill-percentage:nth-child(2)::before {
-  width: 100%;
+  width: 90%;
   -webkit-animation: skill_2 0.6s ease;
           animation: skill_2 0.6s ease;
 }
 .section-wrapper .skill-percentage:nth-child(3)::before {
-  width: 100%;
+  width: 90%;
   -webkit-animation: skill_3 0.6s ease;
           animation: skill_3 0.6s ease;
 }
 .section-wrapper .skill-percentage:nth-child(4)::before {
-  width: 100%;
+  width: 90%;
   -webkit-animation: skill_4 0.6s ease;
           animation: skill_4 0.6s ease;
 }
 .section-wrapper .skill-percentage:nth-child(5)::before {
-  width: 100%;
+  width: 90%;
   -webkit-animation: skill_5 0.6s ease;
           animation: skill_5 0.6s ease;
 }
 .section-wrapper .skill-percentage:nth-child(6)::before {
-  width: 100%;
+  width: 90%;
   -webkit-animation: skill_6 0.6s ease;
           animation: skill_6 0.6s ease;
 }
 .section-wrapper .skill-percentage:nth-child(7)::before {
-  width: 100%;
+  width: 90%;
   -webkit-animation: skill_6 0.6s ease;
           animation: skill_6 0.6s ease;
 }
